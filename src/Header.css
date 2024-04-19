@@ -1,0 +1,31 @@
+.header {
+  background-color: rgb(102, 178, 255);
+  height: 6vh;
+  color: white;
+  box-shadow: 0px 0px 20px black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-left {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.header-left div,
+.header-right div {
+  margin-right: 10px;
+}
+
+.header-left div:last-child,
+.header-right div:last-child {
+  margin-right: 0;
+}

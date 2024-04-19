@@ -1,8 +1,13 @@
 import './Header.css';
+import { CgMenuGridR } from "react-icons/cg";
+
 const Header = () => {
   return (
     <div className="header">
       <div className="header-left">
+        <div>
+          <CgMenuGridR />
+        </div>
         <div>
           <h1>title</h1>
         </div>

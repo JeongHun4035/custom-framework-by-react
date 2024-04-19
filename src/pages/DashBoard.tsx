@@ -1,5 +1,9 @@
+import { useTranslation } from 'react-i18next';
+
 const DashBoard = () => {
-  return <div>dashboard</div>;
+  const { t } = useTranslation()
+
+  return <div>{ t('dashboard.title') }</div>;
 };
 
 export default DashBoard;

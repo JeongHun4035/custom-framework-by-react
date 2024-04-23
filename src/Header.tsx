@@ -1,5 +1,5 @@
 import './Header.css';
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { TbMenu2 } from 'react-icons/tb';
 import { CgMenuMotion } from 'react-icons/cg';
 import { useTranslation } from 'react-i18next';
@@ -7,6 +7,9 @@ import i18n from './locales/i18n';
 import CustomSelect from '@/components/CustomSelect';
 import { IOption, ICustomStyle } from "@/types"
 import { GrLanguage } from "react-icons/gr";
+import { CgSun } from "react-icons/cg";
+import { CiDark } from "react-icons/ci";
+import { useTheme } from './contexts/ThemeContext';
 
 // 메뉴 아이콘
 const MenuIcon = () => {
@@ -27,8 +30,42 @@ const MenuIcon = () => {
   )
 }
 
-// 헤더 우측영역 아이콘
-const HeaderItems = () => {
+// 테마 선택
+const ThemeItem = () => {
+  const { themeStatus, toggleTheme } = useTheme();
+
+  return (
+    <div className='header-item-icon' onClick={toggleTheme}>
+      {themeStatus === 'CgSun' ? <CgSun /> : <CiDark />}
+    </div>
+  );
+}
+
+// 언어 선택
+const LanguageItem = () => {
+  const currentTheme = useTheme().themeStatus
+  const defaultSelectStyle: ICustomStyle = {
+    width: '80px',
+    border: 'none',
+    background: 'rgb(102, 178, 255)',
+    color: 'rgb(255 255 255)',
+    height: '33px'
+  }
+  const [selectStyle, setSelectStyle] = useState<ICustomStyle>(defaultSelectStyle)
+  useEffect(() => {
+    if (currentTheme === 'CgSun') {
+      setSelectStyle(defaultSelectStyle);
+    } else {
+      setSelectStyle({
+        width: '80px',
+        border: 'none',
+        background: '#333', 
+        color: '#fff', 
+        height: '33px'
+      });
+    }
+  }, [currentTheme])
+  
   const langOptions: IOption[] = [
     {
       value: 'ko',
@@ -39,15 +76,6 @@ const HeaderItems = () => {
       label: 'English'
     },
   ]
-
-  const selectStyle: ICustomStyle = {
-    width: '80px',
-    border: 'none',
-    background: 'rgb(102, 178, 255)',
-    color: 'rgb(255 255 255)',
-    height: '33px'
-  }
-  
   const changeLanguage = () => {
     if (i18n.language === 'ko') {
       i18n.changeLanguage('en')
@@ -55,7 +83,6 @@ const HeaderItems = () => {
       i18n.changeLanguage('ko')
     }
   }
-
 
   return (
     <>
@@ -79,7 +106,8 @@ const Header = () => {
         </div>
       </div>
       <div className="header-right">
-        <HeaderItems />
+        <ThemeItem />
+        <LanguageItem />
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ const CustomSelect: React.FC<ICustomSelectProps> = ({ options, customStyle, onSe
   };
 
   return (
-    <div>
+    <>
       <select
         style={customStyle}
         onChange={handleSelectChange} >
@@ -21,7 +21,7 @@ const CustomSelect: React.FC<ICustomSelectProps> = ({ options, customStyle, onSe
           <option key={option.value} value={option.value} >{ option.label }</option>
         ))}
       </select>
-    </div>
+    </>
   )
 }
 export default CustomSelect;
